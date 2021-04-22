@@ -220,7 +220,7 @@ def communicate_manual(team: int, move: str) -> str:
 
 # ----------------------- GAME ----------------------- #
 
-for i in range(150):
+for i in range(MOVE_LIMIT):
     if TEAM_O_MANUAL:
         if i == 0:
             mov0 = communicate_manual(0, f'{HOUSE_PATTERN}\r\n0')

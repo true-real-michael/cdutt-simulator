@@ -208,7 +208,7 @@ def get_auto(team_pipe) -> str:
 
 
 def communicate_auto(team_pipe, move: str) -> str:
-    team_pipe.sendline(move)
+    team_pipe.sendline(f'{move}\r\n')
     team_pipe.expect('.*')
     return team_pipe.after.split()[-1]
 

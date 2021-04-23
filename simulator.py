@@ -125,8 +125,6 @@ def check_and_execute(move: str, team: int) -> bool:
         print(f'ERROR: Team{team} invalid move {move}\n       Team does not own the figure {figure}')
         return False
 
-    #
-
     if figure[0] == 'A':
         if not (delta_row, delta_col) in ((0, 1), (1, 0), (0, 2), (2, 0), (1, 1), (2, 2)):
             print(f'ERROR: Team{team} invalid move {move}\n       Invalid move for {figure}')
@@ -190,23 +188,6 @@ if not TEAM_1_MANUAL:
 print_map()
 
 
-def send_man(team: int, move: str) -> None:
-    print(f'Team{1 - team} made a move: {move}')
-
-
-def get_man(team: int) -> str:
-    return input(f'Team{team}\'s turn\n')
-
-
-def send_auto(team_pipe, move: str) -> None:
-    team_pipe.sendline(move)
-    team_pipe.expect('.*')
-
-
-def get_auto(team_pipe) -> str:
-    return team_pipe.after.split()[-1]
-
-
 def communicate_auto(team_pipe, move: str) -> str:
     team_pipe.sendline(f'{move}\r\n')
     team_pipe.expect('.*')
@@ -233,7 +214,6 @@ for i in range(MOVE_LIMIT):
             mov0 = communicate_auto(t0, mov1)
         print(mov0)
 
-    # print_map()
     res0 = check_and_execute(mov0, 0)
     if not res0:
         print('Team1 wins!')
@@ -252,7 +232,6 @@ for i in range(MOVE_LIMIT):
             mov1 = communicate_auto(t1, mov0)
         print(mov1)
 
-    # print_map()
     res1 = check_and_execute(mov1, 1)
     if not res1:
         print('Team0 wins!')
